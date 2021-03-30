@@ -19,4 +19,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Application\ApplicationLayer\ApplicationLayer.csproj" />
+    <ProjectReference Include="..\..\src\Domain\DomainLayer\DomainLayer.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\InfrastructureLayer\InfrastructureLayer.csproj" />
+  </ItemGroup>
+
 </Project>
