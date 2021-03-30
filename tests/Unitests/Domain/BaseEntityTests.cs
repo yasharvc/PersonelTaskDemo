@@ -27,5 +27,12 @@ namespace Unitests.Domain
 
 			Assert.False(string.IsNullOrEmpty(entity.Id));
 		}
+		[Fact]
+		public void When_Inistanciate_Should_Id_Has_Valid_GUID()
+		{
+			var entity = new TestEntity();
+
+			Assert.NotEqual(Guid.Parse(entity.Id), Guid.Empty);
+		}
 	}
 }
