@@ -20,5 +20,12 @@ namespace Unitests.Domain
 
 			Assert.True(entity.Created.CompareTo(beforeCreationDateTime) > 0);
 		}
+		[Fact]
+		public void When_Inistanciate_Should_Id_Not_Empty()
+		{
+			var entity = new TestEntity();
+
+			Assert.False(string.IsNullOrEmpty(entity.Id));
+		}
 	}
 }
