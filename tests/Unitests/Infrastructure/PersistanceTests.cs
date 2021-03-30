@@ -13,11 +13,7 @@ namespace Unitests.Infrastructure
 		[Fact]
 		public async void With_InMemorySetting_DbContext_Should_Connect_To_InMemory()
 		{
-			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-			.UseInMemoryDatabase(databaseName: "Test")
-			.Options;
-
-			using var context = new ApplicationDbContext(options);
+			ApplicationDbContext context = GetInMemoryDbContext();
 			var p = new Personel
 			{
 				FirstName = "Yashar",
@@ -28,7 +24,15 @@ namespace Unitests.Infrastructure
 			context.Personels.Add(p);
 			context.SaveChanges();
 			Assert.Equal(1, await context.Personels.CountAsync());
+		}
 
+		private static ApplicationDbContext GetInMemoryDbContext()
+		{
+			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+						.UseInMemoryDatabase(databaseName: "Test")
+						.Options;
+			var context = new ApplicationDbContext(options);
+			return context;
 		}
 	}
 }
