@@ -9,6 +9,7 @@ namespace DomainLayer.Common
 		public BaseEntity()
 		{
 			Created = DateTime.Now;
+			Id = Guid.NewGuid().ToString();
 		}
 	}
 }
