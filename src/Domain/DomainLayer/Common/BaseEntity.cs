@@ -6,5 +6,9 @@ namespace DomainLayer.Common
 	{
 		public string Id { get; set; }
 		public DateTime Created { get; set; }
+		public BaseEntity()
+		{
+			Created = DateTime.Now;
+		}
 	}
 }
