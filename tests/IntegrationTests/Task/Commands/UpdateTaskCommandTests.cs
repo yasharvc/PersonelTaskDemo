@@ -15,9 +15,9 @@ namespace IntegrationTests.Task.Commands
 	{
 		protected override void AddAdditionalServices(IServiceCollection services)
 		{
-			services.AddSingleton<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>, CreateTaskCommandHandler>();
+			services.AddSingleton<IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>, CreateTaskCommandHandler>();
 
-			services.AddSingleton<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>, UpdateTaskCommandHandler>();
+			services.AddSingleton<IRequestHandler<UpdateTaskCommand, DomainLayer.Entities.Task>, UpdateTaskCommandHandler>();
 		}
 
 		[Fact]

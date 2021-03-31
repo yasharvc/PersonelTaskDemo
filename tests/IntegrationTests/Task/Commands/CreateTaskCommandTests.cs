@@ -3,8 +3,6 @@ using ApplicationLayer.Task.Commands.CreateTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using Xunit;
 
@@ -15,8 +13,7 @@ namespace IntegrationTests.Task.Commands
 		protected override void AddAdditionalServices(IServiceCollection services)
 		{
 			services.AddSingleton<IRequest<DomainLayer.Entities.Task>, CreateTaskCommand>();
-			services.AddSingleton<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>, CreateTaskCommandHandler>();
-
+			services.AddSingleton<IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>, CreateTaskCommandHandler>();
 		}
 
 		[Fact]
