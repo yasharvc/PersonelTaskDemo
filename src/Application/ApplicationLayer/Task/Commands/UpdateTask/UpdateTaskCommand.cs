@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Common.Interfaces;
+﻿using ApplicationLayer.Common.Exceptions;
+using ApplicationLayer.Common.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,12 +42,20 @@ namespace ApplicationLayer.Task.Commands.UpdateTask
 		{
 			try
 			{
-				var newTask = request.ToEntity();
+				DomainLayer.Entities.Task task = request.ToEntity();
+				var entity = await AppDbContext.Tasks.FindAsync(task.Id);
 
-				AppDbContext.Tasks.Add(newTask);
+				if (entity == null)
+					throw new NotFoundException();
+
+				entity.Description = task.Description;
+				entity.Status = task.Status;
+				entity.Title = task.Title;
+				entity.DueDate = task.DueDate;
+
 				await AppDbContext.SaveChangesAsync(cancellationToken);
 
-				return newTask;
+				return entity;
 			}
 			catch (Exception e)
 			{
