@@ -8,17 +8,19 @@ namespace IntegrationTests
 	public abstract class DependencyInjection
 	{
 		IServiceCollection Services { get; } = new ServiceCollection();
+		ApplicationDbContext ApplicationDbContext { get; }
 
 		protected ServiceProvider ServiceProvider { get; }
 
 		public DependencyInjection()
 		{
-			Services.AddSingleton<IApplicationDbContext>(sp=> {
-				var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
 						.UseInMemoryDatabase(databaseName: "Test")
 						.Options;
-				var context = new ApplicationDbContext(options);
-				return context;
+			ApplicationDbContext = new ApplicationDbContext(options);
+			Services.AddSingleton<IApplicationDbContext>(sp =>
+			{
+				return ApplicationDbContext;
 			});
 			AddAdditionalServices(Services);
 			ServiceProvider = Services.BuildServiceProvider();
