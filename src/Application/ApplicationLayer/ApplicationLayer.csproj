@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Personel\Commands\UpdatePersonel\" />
     <Folder Include="Personel\Queries\" />
     <Folder Include="Task\Queries\" />
   </ItemGroup>
