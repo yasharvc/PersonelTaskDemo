@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using Xunit;
 
 namespace IntegrationTests.Task.Commands
 {
@@ -13,6 +15,25 @@ namespace IntegrationTests.Task.Commands
 		{
 			services.AddSingleton<IRequest<DomainLayer.Entities.Task>, CreateTaskCommand>();
 			services.AddSingleton<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>, CreateTaskCommandHandler>();
+
+		}
+
+		[Fact]
+		public async void Should_Create_Entity_Successfully()
+		{
+			var cmd = new CreateTaskCommand
+			{
+				Description="Test",
+				DueDate=DateTime.Now.AddDays(1),
+				Title="Title"
+			};
+
+			var handler = ServiceProvider.GetService<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>>();
+
+			var result = await handler.Handle(cmd, new CancellationToken());
+
+			Assert.False(string.IsNullOrEmpty(result.Id));
+			
 		}
 	}
 }
