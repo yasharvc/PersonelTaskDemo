@@ -2,6 +2,7 @@
 using InfrastructureLayer.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace IntegrationTests
 {
@@ -15,7 +16,7 @@ namespace IntegrationTests
 		public DependencyInjection()
 		{
 			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-						.UseInMemoryDatabase(databaseName: "Test")
+						.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
 						.Options;
 			ApplicationDbContext = new ApplicationDbContext(options);
 

@@ -26,7 +26,7 @@ namespace IntegrationTests.Task.Commands
 				Title="Title"
 			};
 
-			var handler = ServiceProvider.GetService<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>>();
+			var handler = ServiceProvider.GetService<IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>>();
 
 			var result = await handler.Handle(cmd, new CancellationToken());
 
