@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ApplicationLayer.Personel.DeletePersonel
+namespace ApplicationLayer.Personel.Commands.DeletePersonel
 {
 	public class DeletePersonelCommand : IRequest<DomainLayer.Entities.Personel>
 	{

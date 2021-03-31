@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ApplicationLayer.Personel.CreatePersonel
+namespace ApplicationLayer.Personel.Commands.CreatePersonel
 {
 	public class CreatePersonelCommand : IRequest<DomainLayer.Entities.Personel>
 	{

@@ -1,14 +1,14 @@
 ﻿using ApplicationLayer.Common.Interfaces;
-using ApplicationLayer.Personel.CreatePersonel;
+using ApplicationLayer.Personel.Commands.CreatePersonel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;
 using Xunit;
 
-namespace IntegrationTests.Personel
+namespace IntegrationTests.Personel.Commands
 {
-	public class PersonelCommandTests : DependencyInjection
+	public class CreatePersonelCommandTests : DependencyInjection
 	{
 		protected override void AddAdditionalServices(IServiceCollection services)
 		{
