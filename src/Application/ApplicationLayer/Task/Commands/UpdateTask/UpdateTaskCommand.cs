@@ -27,7 +27,7 @@ namespace ApplicationLayer.Task.Commands.UpdateTask
 			};
 		}
 	}
-	public class UpdateTaskCommandHandler : IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>
+	public class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand, DomainLayer.Entities.Task>
 	{
 		private IApplicationDbContext AppDbContext { get; }
 		private ILogger Logger { get; }
@@ -38,7 +38,7 @@ namespace ApplicationLayer.Task.Commands.UpdateTask
 			AppDbContext = context;
 			Logger = logger;
 		}
-		public async Task<DomainLayer.Entities.Task> Handle(IRequest<DomainLayer.Entities.Task> request, CancellationToken cancellationToken)
+		public async Task<DomainLayer.Entities.Task> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
 		{
 			try
 			{

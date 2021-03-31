@@ -24,7 +24,7 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 			};
 		}
 	}
-	public class CreateTaskCommandHandler : IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>
+	public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>
 	{
 		private IApplicationDbContext AppDbContext { get; }
 		private ILogger Logger { get; }
@@ -35,7 +35,7 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 			AppDbContext = context;
 			Logger = logger;
 		}
-		public async Task<DomainLayer.Entities.Task> Handle(IRequest<DomainLayer.Entities.Task> request, CancellationToken cancellationToken)
+		public async Task<DomainLayer.Entities.Task> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
 		{
 			try
 			{
