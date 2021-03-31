@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Task.Commands.CreateTask;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,8 @@ namespace IntegrationTests.Task.Commands
 			var result = await handler.Handle(cmd, new CancellationToken());
 
 			Assert.False(string.IsNullOrEmpty(result.Id));
-			
+			Assert.Equal(1, await ApplicationDbContext.Tasks.CountAsync());
+			Assert.Equal(result.Id, (await ApplicationDbContext.Tasks.FirstAsync()).Id);
 		}
 	}
 }
