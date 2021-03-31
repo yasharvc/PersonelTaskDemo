@@ -4,8 +4,6 @@ using ApplicationLayer.Task.Commands.UpdateTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using Xunit;
 
@@ -30,13 +28,23 @@ namespace IntegrationTests.Task.Commands
 				Title="Before"
 			};
 
-			var handler = ServiceProvider.GetService<IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>>();
+			var createHandler = ServiceProvider.GetService<IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>>();
+			var updateHandler = ServiceProvider.GetService<IRequestHandler<UpdateTaskCommand, DomainLayer.Entities.Task>>();
 
-			var result = await handler.Handle(cmd, new CancellationToken());
+			var insertedTask = await createHandler.Handle(cmd, new CancellationToken());
+
+			var result = await updateHandler.Handle(new UpdateTaskCommand
+			{
+				Id = insertedTask.Id,
+				Description = insertedTask.Description,
+				Title = "After",
+				DueDate = insertedTask.DueDate
+			}, new CancellationToken());
+
 
 			Assert.False(string.IsNullOrEmpty(result.Id));
 			Assert.Equal(1, await ApplicationDbContext.Tasks.CountAsync());
-			Assert.Equal(result.Id, (await ApplicationDbContext.Tasks.FirstAsync()).Id);
+			Assert.Equal(result.Title, (await ApplicationDbContext.Tasks.FirstAsync()).Title);
 		}
 	}
 }
