@@ -4,5 +4,6 @@ namespace ApplicationLayer.Common.Interfaces
 {
 	public interface IRequest<T> where T: BaseEntity
 	{
+		T ToEntity();
 	}
 }

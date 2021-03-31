@@ -11,6 +11,8 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 		public string Description { get; set; }
 		public DateTime? DueDate { get; set; }
 
+		public DomainLayer.Entities.Task ToEntity() => this;
+
 		public static implicit operator DomainLayer.Entities.Task(CreateTaskCommand c)
 		{
 			return new DomainLayer.Entities.Task
@@ -22,7 +24,7 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 			};
 		}
 	}
-	public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>
+	public class CreateTaskCommandHandler : IRequestHandler<IRequest<DomainLayer.Entities.Task>, DomainLayer.Entities.Task>
 	{
 		private IApplicationDbContext AppDbContext { get; }
 		private ILogger Logger { get; }
@@ -33,11 +35,11 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 			AppDbContext = context;
 			Logger = logger;
 		}
-		public async Task<DomainLayer.Entities.Task> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+		public async Task<DomainLayer.Entities.Task> Handle(IRequest<DomainLayer.Entities.Task> request, CancellationToken cancellationToken)
 		{
 			try
 			{
-				DomainLayer.Entities.Task newTask = request;
+				var newTask = request.ToEntity();
 
 				AppDbContext.Tasks.Add(newTask);
 				await AppDbContext.SaveChangesAsync(cancellationToken);
