@@ -1,7 +1,7 @@
 ﻿using DomainLayer.Common;
+using DomainLayer.Enums;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DomainLayer.Entities
 {
