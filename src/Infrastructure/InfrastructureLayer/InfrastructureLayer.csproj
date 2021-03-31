@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application\ApplicationLayer\ApplicationLayer.csproj" />
     <ProjectReference Include="..\..\Domain\DomainLayer\DomainLayer.csproj" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.0" />

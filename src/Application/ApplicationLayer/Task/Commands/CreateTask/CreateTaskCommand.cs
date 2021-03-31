@@ -1,5 +1,7 @@
 ﻿using ApplicationLayer.Common.Interfaces;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ApplicationLayer.Task.Commands.CreateTask
 {
@@ -11,6 +13,9 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 	}
 	public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, DomainLayer.Entities.Task>
 	{
-
+		public Task<DomainLayer.Entities.Task> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -1,10 +1,11 @@
-﻿using DomainLayer.Entities;
+﻿using ApplicationLayer.Common.Interfaces;
+using DomainLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace InfrastructureLayer.Persistance
 {
-	public class ApplicationDbContext : DbContext
-	{
+	public class ApplicationDbContext : DbContext, IApplicationDbContext
+    {
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
 		{
