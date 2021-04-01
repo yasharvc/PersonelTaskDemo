@@ -8,5 +8,6 @@ namespace DomainLayer.Entities
 		public string City { get; set; }
 		public string Street { get; set; }
 		public string No { get; set; }
+		public Personel Personel { get; set; }
 	}
 }

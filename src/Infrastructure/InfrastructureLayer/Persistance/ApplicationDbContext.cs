@@ -13,6 +13,7 @@ namespace InfrastructureLayer.Persistance
 		public DbSet<Personel> Personels { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<PersonelTask> PersonelTasks { get; set; }
+		public DbSet<PersonelAddress> PersonelAddresses { get; set; }
 		Dictionary<string, IDbContextTransaction> Transactions { get; set; } = new Dictionary<string, IDbContextTransaction>();
 		ILogger Logger { get; }
 
@@ -89,6 +90,10 @@ namespace InfrastructureLayer.Persistance
                 .HasOne(p => p.Task)
                 .WithMany(s => s.PersonelTasks)
                 .HasForeignKey(sc => sc.TaskId);
+
+			modelBuilder.Entity<Personel>()
+				.HasMany(c => c.Addresses)
+				.WithOne(p => p.Personel);
         }
 	}
 }

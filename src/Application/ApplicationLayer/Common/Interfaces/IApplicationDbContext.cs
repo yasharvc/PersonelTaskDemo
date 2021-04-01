@@ -9,8 +9,9 @@ namespace ApplicationLayer.Common.Interfaces
     {
         DbSet<DomainLayer.Entities.Task> Tasks { get; set; }
 
-        public DbSet<DomainLayer.Entities.Personel> Personels { get; set; }
-        public DbSet<PersonelTask> PersonelTasks { get; set; }
+        DbSet<DomainLayer.Entities.Personel> Personels { get; set; }
+        DbSet<PersonelTask> PersonelTasks { get; set; }
+        DbSet<PersonelAddress> PersonelAddresses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
