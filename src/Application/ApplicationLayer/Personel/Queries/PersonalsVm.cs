@@ -2,7 +2,7 @@
 
 namespace ApplicationLayer.Personel.Queries
 {
-	public class PesonalsVm
+	public class PersonalsVm
 	{
 		public IList<PersonelDto> Personels { get; set; }
 	}
