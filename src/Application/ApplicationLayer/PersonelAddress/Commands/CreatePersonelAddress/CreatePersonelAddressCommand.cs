@@ -34,14 +34,17 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 	}
 	public class CreatePersonelAddressCommandHandler : IRequestHandler<CreatePersonelAddressCommand, DomainLayer.Entities.PersonelAddress>
 	{
-		private IApplicationDbContext AppDbContext { get; }
-		private ILogger Logger { get; }
+		IApplicationDbContext AppDbContext { get; }
+		ILogger Logger { get; }
+		IValidator<DomainLayer.Entities.PersonelAddress> Validator { get; }
 
 		public CreatePersonelAddressCommandHandler(IApplicationDbContext context,
-			ILogger logger)
+			ILogger logger,
+			IValidator<DomainLayer.Entities.PersonelAddress> validator)
 		{
 			AppDbContext = context;
 			Logger = logger;
+			Validator = validator;
 		}
 		public async Task<DomainLayer.Entities.PersonelAddress> Handle(CreatePersonelAddressCommand request, CancellationToken cancellationToken)
 		{

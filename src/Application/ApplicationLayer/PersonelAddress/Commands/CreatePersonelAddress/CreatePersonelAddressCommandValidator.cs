@@ -1,7 +1,8 @@
-﻿using ApplicationLayer.Common.Interfaces;
+﻿using ApplicationLayer.Common.Exceptions.Application;
+using ApplicationLayer.Common.Exceptions.Application.Personel;
+using ApplicationLayer.Common.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 {
@@ -9,8 +10,12 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 	{
 		public IEnumerable<Exception> Validate(DomainLayer.Entities.PersonelAddress value)
 		{
-			if(value.Personel == null)
-
+			var res = new List<Exception>();
+			if (value.Personel == null)
+				res.Add(new PersonelNotFoundException());
+			if (string.IsNullOrEmpty(value.Id))
+				res.Add(new InvalidIdException());
+			return res;
 		}
 	}
 }
