@@ -31,7 +31,7 @@ namespace Unitests.Infrastructure
 			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
 						.UseInMemoryDatabase(databaseName: "Test")
 						.Options;
-			var context = new ApplicationDbContext(options);
+			var context = new ApplicationDbContext(options, new NullLogger());
 			return context;
 		}
 	}

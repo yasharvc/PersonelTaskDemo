@@ -18,7 +18,7 @@ namespace IntegrationTests
 			var options = new DbContextOptionsBuilder<ApplicationDbContext>()
 						.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
 						.Options;
-			ApplicationDbContext = new ApplicationDbContext(options);
+			ApplicationDbContext = new ApplicationDbContext(options, new NullLogger());
 
 			Services.AddSingleton<ILogger, NullLogger>();
 
