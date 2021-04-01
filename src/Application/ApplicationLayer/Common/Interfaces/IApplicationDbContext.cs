@@ -1,5 +1,4 @@
-﻿using DomainLayer.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,8 +9,8 @@ namespace ApplicationLayer.Common.Interfaces
         DbSet<DomainLayer.Entities.Task> Tasks { get; set; }
 
         DbSet<DomainLayer.Entities.Personel> Personels { get; set; }
-        DbSet<PersonelTask> PersonelTasks { get; set; }
-        DbSet<PersonelAddress> PersonelAddresses { get; set; }
+        DbSet<DomainLayer.Entities.PersonelTask> PersonelTasks { get; set; }
+        DbSet<DomainLayer.Entities.PersonelAddress> PersonelAddresses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 

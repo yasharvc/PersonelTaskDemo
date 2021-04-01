@@ -25,8 +25,9 @@ namespace InfrastructureLayer.Persistance
 
 		public string BeginTransaction()
 		{
-			var guid = Guid.NewGuid().ToString();
+			var guid = $"TRAN_{Guid.NewGuid().ToString().Replace("-", "")}";
 			Transactions[guid] = Database.BeginTransaction();
+			//Transactions[guid].CreateSavepoint(guid);
 			return guid;
 		}
 
@@ -61,6 +62,7 @@ namespace InfrastructureLayer.Persistance
 				{
 					var tran = Transactions[transId];
 					await tran.RollbackAsync();
+					//await tran.CreateSavepointAsync(transId);
 					Transactions.Remove(transId);
 					//GC.SuppressFinalize(tran);
 				}
