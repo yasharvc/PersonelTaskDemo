@@ -29,7 +29,7 @@ namespace InfrastructureLayer.Persistance
 			return guid;
 		}
 
-		public async System.Threading.Tasks.Task CommitTransaction(string transId)
+		public async System.Threading.Tasks.Task CommitTransactionAsync(string transId)
 		{
 			try
 			{
@@ -52,9 +52,27 @@ namespace InfrastructureLayer.Persistance
 			}
 		}
 
-		public async System.Threading.Tasks.Task RollbackTransaction(string transId)
+		public async System.Threading.Tasks.Task RollbackTransactionAsync(string transId)
 		{
-			throw new System.NotImplementedException();
+			try
+			{
+				if (Transactions.ContainsKey(transId))
+				{
+					var tran = Transactions[transId];
+					await tran.RollbackAsync();
+					Transactions.Remove(transId);
+					//GC.SuppressFinalize(tran);
+				}
+				else
+				{
+					throw new NotFoundException();
+				}
+			}
+			catch (Exception e)
+			{
+				await Logger.ErrorAsync(e);
+				throw;
+			}
 		}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -72,5 +90,5 @@ namespace InfrastructureLayer.Persistance
                 .WithMany(s => s.PersonelTasks)
                 .HasForeignKey(sc => sc.TaskId);
         }
-    }
+	}
 }
