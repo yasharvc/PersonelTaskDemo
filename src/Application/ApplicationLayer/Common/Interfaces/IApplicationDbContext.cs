@@ -13,5 +13,9 @@ namespace ApplicationLayer.Common.Interfaces
         public DbSet<PersonelTask> PersonelTasks { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
+        string BeginTransaction();
+        void CommitTransaction(string transId);
+        void RollbackTransaction(string transId);
     }
 }
