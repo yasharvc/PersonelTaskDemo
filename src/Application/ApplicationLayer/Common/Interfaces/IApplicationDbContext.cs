@@ -15,7 +15,7 @@ namespace ApplicationLayer.Common.Interfaces
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
         string BeginTransaction();
-        void CommitTransaction(string transId);
-        void RollbackTransaction(string transId);
+        System.Threading.Tasks.Task CommitTransactionAsync(string transId);
+        System.Threading.Tasks.Task RollbackTransactionAsync(string transId);
     }
 }
