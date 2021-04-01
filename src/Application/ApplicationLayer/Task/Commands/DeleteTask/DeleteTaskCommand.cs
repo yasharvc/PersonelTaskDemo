@@ -9,10 +9,6 @@ namespace ApplicationLayer.Task.Commands.DeleteTask
 	public class DeleteTaskCommand : IRequest<DomainLayer.Entities.Task>
 	{
 		public string Id { get; set; }
-
-		public DomainLayer.Entities.Task ToEntity() => new DomainLayer.Entities.Task {
-			Id = Id
-		};
 	}
 	public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand, DomainLayer.Entities.Task>
 	{
@@ -29,7 +25,7 @@ namespace ApplicationLayer.Task.Commands.DeleteTask
 		{
 			try
 			{
-				var task = await AppDbContext.Tasks.FindAsync(request.ToEntity().Id);
+				var task = await AppDbContext.Tasks.FindAsync(request.Id);
 
 				if (task == null)
 					throw new NotFoundException();

@@ -11,8 +11,6 @@ namespace ApplicationLayer.Personel.Commands.CreatePersonel
 		public string LastName { get; set; }
 		public DateTime DateOfBirth { get; set; }
 
-		public DomainLayer.Entities.Personel ToEntity() => this;
-
 		public static implicit operator DomainLayer.Entities.Personel(CreatePersonelCommand c)
 		{
 			return new DomainLayer.Entities.Personel
@@ -38,7 +36,7 @@ namespace ApplicationLayer.Personel.Commands.CreatePersonel
 		{
 			try
 			{
-				var newPersonel = request.ToEntity();
+				DomainLayer.Entities.Personel newPersonel = request;
 
 				AppDbContext.Personels.Add(newPersonel);
 				await AppDbContext.SaveChangesAsync(cancellationToken);

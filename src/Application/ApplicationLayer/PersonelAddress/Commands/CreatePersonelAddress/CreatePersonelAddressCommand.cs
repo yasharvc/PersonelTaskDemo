@@ -16,8 +16,6 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 		public string No { get; set; }
 		public string PersonelId { get; set; }
 
-		public DomainLayer.Entities.PersonelAddress ToEntity() => this;
-
 		public static implicit operator DomainLayer.Entities.PersonelAddress(CreatePersonelAddressCommand c)
 		{
 			return new DomainLayer.Entities.PersonelAddress
@@ -52,7 +50,7 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 			var tranId = "";
 			try
 			{
-				var newPersonelAddress = request.ToEntity();
+				DomainLayer.Entities.PersonelAddress newPersonelAddress = request;
 				var validationResult = Validator.Validate(newPersonelAddress);
 
 				if (validationResult.Any())

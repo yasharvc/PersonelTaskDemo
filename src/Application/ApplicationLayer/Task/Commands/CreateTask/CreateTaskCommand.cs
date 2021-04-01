@@ -11,8 +11,6 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 		public string Description { get; set; }
 		public DateTime? DueDate { get; set; }
 
-		public DomainLayer.Entities.Task ToEntity() => this;
-
 		public static implicit operator DomainLayer.Entities.Task(CreateTaskCommand c)
 		{
 			return new DomainLayer.Entities.Task
@@ -39,7 +37,7 @@ namespace ApplicationLayer.Task.Commands.CreateTask
 		{
 			try
 			{
-				var newTask = request.ToEntity();
+				DomainLayer.Entities.Task newTask = request;
 
 				AppDbContext.Tasks.Add(newTask);
 				await AppDbContext.SaveChangesAsync(cancellationToken);

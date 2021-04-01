@@ -2,8 +2,7 @@
 
 namespace ApplicationLayer.Common.Interfaces
 {
-	public interface IRequest<T> where T: BaseEntity
+	public interface IRequest<T> where T: class
 	{
-		T ToEntity();
 	}
 }

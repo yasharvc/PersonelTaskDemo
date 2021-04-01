@@ -9,11 +9,6 @@ namespace ApplicationLayer.Personel.Commands.DeletePersonel
 	public class DeletePersonelCommand : IRequest<DomainLayer.Entities.Personel>
 	{
 		public string Id { get; set; }
-
-		public DomainLayer.Entities.Personel ToEntity() => new DomainLayer.Entities.Personel
-		{
-			Id = Id
-		};
 	}
 	public class DeletePersonelCommandHandler : IRequestHandler<DeletePersonelCommand, DomainLayer.Entities.Personel>
 	{
@@ -30,7 +25,7 @@ namespace ApplicationLayer.Personel.Commands.DeletePersonel
 		{
 			try
 			{
-				var Personel = await AppDbContext.Personels.FindAsync(request.ToEntity().Id);
+				var Personel = await AppDbContext.Personels.FindAsync(request.Id);
 
 				if (Personel == null)
 					throw new NotFoundException();

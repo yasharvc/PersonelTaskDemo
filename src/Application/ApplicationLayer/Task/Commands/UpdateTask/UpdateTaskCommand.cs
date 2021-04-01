@@ -13,8 +13,6 @@ namespace ApplicationLayer.Task.Commands.UpdateTask
 		public string Description { get; set; }
 		public DateTime? DueDate { get; set; }
 
-		public DomainLayer.Entities.Task ToEntity() => this;
-
 		public static implicit operator DomainLayer.Entities.Task(UpdateTaskCommand c)
 		{
 			return new DomainLayer.Entities.Task
@@ -42,7 +40,7 @@ namespace ApplicationLayer.Task.Commands.UpdateTask
 		{
 			try
 			{
-				DomainLayer.Entities.Task task = request.ToEntity();
+				DomainLayer.Entities.Task task = request;
 				var entity = await AppDbContext.Tasks.FindAsync(task.Id);
 
 				if (entity == null)
