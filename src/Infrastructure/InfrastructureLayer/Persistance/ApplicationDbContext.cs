@@ -56,6 +56,8 @@ namespace InfrastructureLayer.Persistance
 
 		public async System.Threading.Tasks.Task RollbackTransactionAsync(string transId)
 		{
+			if (string.IsNullOrEmpty(transId))
+				return;
 			try
 			{
 				if (Transactions.ContainsKey(transId))
@@ -65,10 +67,6 @@ namespace InfrastructureLayer.Persistance
 					//await tran.CreateSavepointAsync(transId);
 					Transactions.Remove(transId);
 					//GC.SuppressFinalize(tran);
-				}
-				else
-				{
-					throw new NotFoundException();
 				}
 			}
 			catch (Exception e)

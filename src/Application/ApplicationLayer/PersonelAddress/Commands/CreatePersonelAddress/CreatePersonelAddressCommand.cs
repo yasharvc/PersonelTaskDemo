@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,6 +53,10 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 			try
 			{
 				var newPersonelAddress = request.ToEntity();
+				var validationResult = Validator.Validate(newPersonelAddress);
+
+				if (validationResult.Any())
+					throw validationResult.First();
 
 				tranId = AppDbContext.BeginTransaction();
 
