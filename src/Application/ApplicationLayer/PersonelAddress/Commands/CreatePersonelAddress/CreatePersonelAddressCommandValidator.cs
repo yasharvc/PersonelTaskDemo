@@ -53,6 +53,7 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 			}, new System.Threading.CancellationToken());
 			if (personel == null)
 				res.Add(new NotFoundException());
+			GC.SuppressFinalize(personel);
 		}
 	}
 }

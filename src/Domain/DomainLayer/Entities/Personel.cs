@@ -9,8 +9,8 @@ namespace DomainLayer.Entities
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public DateTime DateOfBirth { get; set; }
-		public virtual ICollection<PersonelAddress> Addresses { get; set; }
+		public virtual ICollection<PersonelAddress> Addresses { get; set; } = new List<PersonelAddress>();
 
-		public virtual IList<PersonelTask> PersonelTasks { get; set; }
+		public virtual IList<PersonelTask> PersonelTasks { get; set; } = new List<PersonelTask>();
 	}
 }
