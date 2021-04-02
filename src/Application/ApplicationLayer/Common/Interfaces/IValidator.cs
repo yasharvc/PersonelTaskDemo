@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.Common.Interfaces
 {
-	public interface IValidator<T> where T : BaseEntity
+	public interface IValidator<T> where T : class
 	{
 		IEnumerable<Exception> Validate(T value);
 		Task<IEnumerable<Exception>> ValidateAsync(T value);

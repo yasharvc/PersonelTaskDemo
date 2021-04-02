@@ -7,11 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
+namespace ApplicationLayer.PersonelAddress.Commands.UpdatePersonelAddress
 {
-	public class CreatePersonelAddressCommandValidator : IValidator<CreatePersonelAddressCommand>
+	public class UpdatePersonelAddressCommandValidator : IValidator<UpdatePersonelAddressCommand>
 	{
-		public CreatePersonelAddressCommandValidator(
+		public UpdatePersonelAddressCommandValidator(
 			IRequestHandler<GetPersonelByIdQuery, PersonelVm> personelFinder)
 		{
 			PersonelFinder = personelFinder;
@@ -19,7 +19,7 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 
 		IRequestHandler<GetPersonelByIdQuery, PersonelVm> PersonelFinder { get; }
 
-		public IEnumerable<Exception> Validate(CreatePersonelAddressCommand value)
+		public IEnumerable<Exception> Validate(UpdatePersonelAddressCommand value)
 		{
 			var res = new List<Exception>();
 
@@ -32,12 +32,14 @@ namespace ApplicationLayer.PersonelAddress.Commands.CreatePersonelAddress
 			return res;
 		}
 
-		public async Task<IEnumerable<Exception>> ValidateAsync(CreatePersonelAddressCommand value)
+		public async Task<IEnumerable<Exception>> ValidateAsync(UpdatePersonelAddressCommand value)
 		{
 			var res = new List<Exception>();
 
-			if (string.IsNullOrEmpty(value.PersonelId))
+			if (value.PersonelId == null)
 				res.Add(new PersonelNotFoundException());
+			if (string.IsNullOrEmpty(value.Id))
+				res.Add(new InvalidIdException());
 			await CheckForPersonel(value, res);
 
 			return res;
