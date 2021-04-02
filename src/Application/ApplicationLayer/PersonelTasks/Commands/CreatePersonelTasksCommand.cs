@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Personel.Queries;
+using ApplicationLayer.PersonelTasks.Queries;
 using DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,17 +24,17 @@ namespace ApplicationLayer.PersonelTasks.Commands
 		IApplicationDbContext AppDbContext { get; }
 		ILogger Logger { get; }
 		IValidator<CreatePersonelTasksCommand> Validator { get; }
-		IRequestHandler<GetPersonelByIdQuery, PersonelVm> PersonelFinder { get; }
+		IRequestHandler<GetPersonelTasksWithPersonelIdQuery, PersonelTaskVm> PersonelTaskFinder { get; }
 
 		public CreatePersonelTasksCommandHandler(IApplicationDbContext context,
 			ILogger logger,
 			IValidator<CreatePersonelTasksCommand> validator,
-			IRequestHandler<GetPersonelByIdQuery, PersonelVm> personelFinder)
+			IRequestHandler<GetPersonelTasksWithPersonelIdQuery, PersonelTaskVm> personelFinder)
 		{
 			AppDbContext = context;
 			Logger = logger;
 			Validator = validator;
-			PersonelFinder = personelFinder;
+			PersonelTaskFinder = personelFinder;
 		}
 		public async Task<PersonelTaskVm> Handle(CreatePersonelTasksCommand request, CancellationToken cancellationToken)
 		{
@@ -46,7 +47,7 @@ namespace ApplicationLayer.PersonelTasks.Commands
 				await DoDbActions(request, cancellationToken);
 
 				await AppDbContext.CommitTransactionAsync(tranId);
-				return await PersonelFinder.Handle(new GetPersonelByIdQuery { PersonelId = request.PersonelId }, cancellationToken);
+				return await PersonelTaskFinder.Handle(new GetPersonelTasksWithPersonelIdQuery { PersonelId = request.PersonelId }, cancellationToken);
 			}
 			catch (Exception e)
 			{
