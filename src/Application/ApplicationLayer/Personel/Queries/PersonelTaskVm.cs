@@ -1,7 +1,10 @@
-﻿namespace ApplicationLayer.Personel.Queries
+﻿using System.Collections.Generic;
+
+namespace ApplicationLayer.Personel.Queries
 {
 	public class PersonelTaskVm
 	{
-		public PersonelTaskDto PersonelTask { get; set; }
+		public PersonelDto Personel { get; set; }
+		public IList<PersonelTaskDto> PersonelTasks { get; set; }
 	}
 }
