@@ -16,6 +16,7 @@ namespace IntegrationTests.PersonelTask
 {
 	public class CreatePersonelAddressCommandTests : DependencyInjection
 	{
+		public CreatePersonelAddressCommandTests() : base(true) { }
 		protected override void AddAdditionalServices(IServiceCollection services)
 		{
 			var configuration = new MapperConfiguration(cfg =>

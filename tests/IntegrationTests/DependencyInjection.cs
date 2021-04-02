@@ -10,7 +10,7 @@ namespace IntegrationTests
 	public abstract class DependencyInjection
 	{
 		IServiceCollection Services { get; } = new ServiceCollection();
-		protected IApplicationDbContext ApplicationDbContext { get; }
+		protected ApplicationDbContext ApplicationDbContext { get; }
 
 		protected ServiceProvider ServiceProvider { get; }
 
@@ -31,11 +31,12 @@ namespace IntegrationTests
 						.UseSqlite(connection)
 						.Options;
 				ApplicationDbContext = new ApplicationDbContext(options, new NullLogger());
+				ApplicationDbContext.Database.EnsureCreated();
 			}
 
 			Services.AddSingleton<ILogger, NullLogger>();
 
-			Services.AddSingleton(sp =>
+			Services.AddSingleton<IApplicationDbContext>(sp =>
 			{
 				return ApplicationDbContext;
 			});
