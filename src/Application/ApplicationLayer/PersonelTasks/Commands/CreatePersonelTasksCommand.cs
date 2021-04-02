@@ -4,6 +4,7 @@ using ApplicationLayer.PersonelTasks.Queries;
 using DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,14 +27,13 @@ namespace ApplicationLayer.PersonelTasks.Commands
 		IValidator<CreatePersonelTasksCommand> Validator { get; }
 		IRequestHandler<GetPersonelTasksWithPersonelIdQuery, PersonelTaskVm> PersonelTaskFinder { get; }
 
-		public CreatePersonelTasksCommandHandler(IApplicationDbContext context,
+		public CreatePersonelTasksCommandHandler(
+			IApplicationDbContext context,
 			ILogger logger,
-			IValidator<CreatePersonelTasksCommand> validator,
 			IRequestHandler<GetPersonelTasksWithPersonelIdQuery, PersonelTaskVm> personelFinder)
 		{
 			AppDbContext = context;
 			Logger = logger;
-			Validator = validator;
 			PersonelTaskFinder = personelFinder;
 		}
 		public async Task<PersonelTaskVm> Handle(CreatePersonelTasksCommand request, CancellationToken cancellationToken)
@@ -109,11 +109,13 @@ namespace ApplicationLayer.PersonelTasks.Commands
 			return newPersonelTask;
 		}
 
-		private async Task<PersonelTask> FindTask(string taskId) => await AppDbContext.PersonelTasks.FindAsync(taskId);
+		private Task<PersonelTask> FindTask(string taskId) => System.Threading.Tasks.Task.FromResult(
+			AppDbContext.PersonelTasks
+			.FirstOrDefault(m=>m.TaskId == taskId));
 
 		private System.Threading.Tasks.Task ValidateInput(CreatePersonelTasksCommand request)
 		{
-			throw new NotImplementedException();
+			return System.Threading.Tasks.Task.CompletedTask;
 		}
 	}
 }
