@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.Personel.Queries
 {
-	public class GetAllPersonelsQuery : IRequest<PersonalsVm>
+	public class GetAllPersonelsQuery : IRequest<PersonelsVm>
 	{
 	}
 
-	public class GetAllPersonelsQueryHandler : IRequestHandler<GetAllPersonelsQuery, PersonalsVm>
+	public class GetAllPersonelsQueryHandler : IRequestHandler<GetAllPersonelsQuery, PersonelsVm>
 	{
 		IApplicationDbContext AppDbContext { get; }
 		IMapper Mapper { get; }
@@ -22,9 +22,9 @@ namespace ApplicationLayer.Personel.Queries
 			AppDbContext = context;
 			Mapper = mapper;
 		}
-		public async Task<PersonalsVm> Handle(GetAllPersonelsQuery request, CancellationToken cancellationToken)
+		public async Task<PersonelsVm> Handle(GetAllPersonelsQuery request, CancellationToken cancellationToken)
 		{
-			return new PersonalsVm
+			return new PersonelsVm
 			{
 				Personels = await AppDbContext.Personels
 					.AsNoTracking()

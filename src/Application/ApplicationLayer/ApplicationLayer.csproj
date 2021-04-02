@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="PersonelAddress\Queries\" />
+    <Folder Include="PersonelTasks\Queries\" />
     <Folder Include="Task\Queries\" />
   </ItemGroup>
 

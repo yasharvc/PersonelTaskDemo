@@ -21,7 +21,7 @@ namespace IntegrationTests.Personel.Queries
 			{
 				cfg.AddProfile<MappingProfile>();
 			});
-			services.AddSingleton<IRequestHandler<GetAllPersonelsQuery, PersonalsVm>, GetAllPersonelsQueryHandler>();
+			services.AddSingleton<IRequestHandler<GetAllPersonelsQuery, PersonelsVm>, GetAllPersonelsQueryHandler>();
 			services.AddSingleton<IRequestHandler<CreatePersonelCommand, DomainLayer.Entities.Personel>, CreatePersonelCommandHandler>();
 
 			services.AddSingleton(configuration.CreateMapper());
@@ -38,7 +38,7 @@ namespace IntegrationTests.Personel.Queries
 			};
 
 			var insertHandler = ServiceProvider.GetService<IRequestHandler<CreatePersonelCommand, DomainLayer.Entities.Personel>>();
-			var readHandler = ServiceProvider.GetService<IRequestHandler<GetAllPersonelsQuery, PersonalsVm>>();
+			var readHandler = ServiceProvider.GetService<IRequestHandler<GetAllPersonelsQuery, PersonelsVm>>();
 
 			var insertedPersonel = await insertHandler.Handle(cmd, new CancellationToken());
 
